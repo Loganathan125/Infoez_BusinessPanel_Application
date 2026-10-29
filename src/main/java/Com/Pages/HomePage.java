@@ -235,6 +235,27 @@ public class HomePage {
 	@AndroidFindBy(uiAutomator = "new UiSelector().text(\"Business dashboard\")")
 	public WebElement businessDashboard;
 	
+	@AndroidFindBy(uiAutomator = "new UiSelector().text(\"Filters & sort\")")
+	public WebElement filterSort;
+	
+	@AndroidFindBy(uiAutomator = "new UiSelector().text(\"Top rated\")")
+	public WebElement topRated;
+	
+	@AndroidFindBy(uiAutomator = "new UiSelector().text(\"4+\")")
+	public WebElement rating4;
+	
+	@AndroidFindBy(uiAutomator = "new UiSelector().text(\"Newest\")")
+	public WebElement newest;
+	
+	@AndroidFindBy(uiAutomator = "new UiSelector().text(\"4.5+\")")
+	public WebElement rating5;
+	
+	@AndroidFindBy(uiAutomator = "new UiSelector().text(\"Most reviewed\")")
+	public WebElement mostReviewed;
+	
+	@AndroidFindBy(uiAutomator = "new UiSelector().text(\"No matches. Try a different name.\")")
+	public WebElement invalid1;
+	
 	
 	
 	

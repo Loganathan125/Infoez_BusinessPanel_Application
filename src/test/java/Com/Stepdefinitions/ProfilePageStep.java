@@ -1,7 +1,10 @@
 package Com.Stepdefinitions;
 
+import java.util.List;
+
 import org.junit.Assert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 
 import Com.BaseClass.BaseClass;
 import Com.Driver.DeviceSessionManager;
@@ -72,10 +75,9 @@ public class ProfilePageStep extends BaseClass {
 
 	@When("the user select the imeage")
 	public void the_user_select_the_imeage() {
-		for(int i=0;i<6;i++) {
-		DeviceSessionManager.getDriver().findElements((By) lp.restaurant).get(i).click();
-		}
-			
+		selectMultiplePhotosByFileName("restaurant_1.jpg","restaurant_2.jpg","restaurant_3.jpg");
+//				                       "restaurant_4.jpg","restaurant_5.jpg","restaurant_6.jpg");
+
 	}
 
 	@Then("the user validate the image view")
@@ -315,6 +317,53 @@ public class ProfilePageStep extends BaseClass {
 		String actual = gettext(DeviceSessionManager.getDriver(), lp.entersubs);
 		Assert.assertEquals("Enterprise is now active on your account.", actual);
 		click(DeviceSessionManager.getDriver(), lp.freeOk);
+	}
+
+	@Given("the user tap open business dashboard")
+	public void the_user_tap_open_business_dashboard() {
+		click(DeviceSessionManager.getDriver(), lp.dashboard);
+	}
+
+	@Then("the user verify the business dashboard page")
+	public void the_user_verify_the_business_dashboard_page() {
+		Assert.assertTrue("Business Dashboard page not displayed", lp.businessDashBoard.isDisplayed());
+	}
+
+	int beforeNotifications;
+
+	@Given("the user tap on notification")
+	public void the_user_tap_on_notification() {
+		visibilityWait(DeviceSessionManager.getDriver(), lp.notifySymbol);
+		click(DeviceSessionManager.getDriver(), lp.notifySymbol);
+	}
+
+	@When("the user capture current notification count")
+	public void the_user_capture_current_notification_count() {
+		visibilityWait(DeviceSessionManager.getDriver(), lp.beforeCount);
+		String rawBefore = lp.beforeCount.getText();
+		if (rawBefore == null || rawBefore.isEmpty()) {
+			rawBefore = lp.beforeCount.getAttribute("content-desc");
+		}
+		beforeNotifications = Integer.parseInt(lp.beforeCount.getText().replaceAll("[^0-9]", ""));
+		System.out.println("BeforeNotification Count: " + beforeNotifications);
+	}
+
+	@When("the user open the first notificattion")
+	public void the_user_open_the_first_notificattion() {
+		visibilityWait(DeviceSessionManager.getDriver(), lp.firstNotification);
+		click(DeviceSessionManager.getDriver(), lp.firstNotification);
+	}
+
+	@Then("the notification count should be decrease by one")
+	public void the_notification_count_should_be_decrease_by_one() {
+		visibilityWait(DeviceSessionManager.getDriver(), lp.beforeCount);
+		String rawAfter = lp.beforeCount.getText();
+		if (rawAfter == null || rawAfter.isEmpty()) {
+			rawAfter = lp.beforeCount.getAttribute("content-desc");
+		}
+		int afterNotification = Integer.parseInt(lp.beforeCount.getText().replaceAll("[^0-9]", ""));
+		System.out.println("AfterNotification Count: " + afterNotification);
+		Assert.assertEquals("Notification count did not decreased by one", beforeNotifications - 1, afterNotification);
 	}
 
 }

@@ -19,6 +19,11 @@ public class LoginStep extends BaseClass {
 
 	LoginPage lp = new LoginPage(DeviceSessionManager.getDriver());
 
+	@Given("the user launch the application")
+	public void the_user_launch_the_application() {
+		relaunchApp(DeviceSessionManager.getDriver());
+	}
+
 	@Given("ven the user tap profile button")
 	public void ven_the_user_tap_profile_button() {
 		visibilityWait(DeviceSessionManager.getDriver(), lp.profileBtn);

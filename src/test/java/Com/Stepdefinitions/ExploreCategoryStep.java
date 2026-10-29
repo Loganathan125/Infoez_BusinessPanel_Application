@@ -89,7 +89,7 @@ public class ExploreCategoryStep extends BaseClass {
 			Assert.assertEquals("places Listed " + headerCount, names.size());
 
 		}
-		click(DeviceSessionManager.getDriver(), lp.NavigationBack);
+		navigateBack(DeviceSessionManager.getDriver());
 	}
 
 	@Given("the users select cafe&Backery category")
@@ -136,7 +136,7 @@ public class ExploreCategoryStep extends BaseClass {
 			Assert.assertEquals("places Listed " + headerCount, names.size());
 
 		}
-		click(DeviceSessionManager.getDriver(), lp.NavigationBack);
+		navigateBack(DeviceSessionManager.getDriver());
 	}
 
 	@Given("the users select Beauty&Spa category")
@@ -183,7 +183,7 @@ public class ExploreCategoryStep extends BaseClass {
 			Assert.assertEquals("places Listed " + headerCount, names.size());
 
 		}
-		click(DeviceSessionManager.getDriver(), lp.NavigationBack);
+		navigateBack(DeviceSessionManager.getDriver());
 	}
 
 	@Given("the users select FitNess&WellNess category")
@@ -230,7 +230,7 @@ public class ExploreCategoryStep extends BaseClass {
 			Assert.assertEquals("places Listed " + headerCount, names.size());
 
 		}
-		click(DeviceSessionManager.getDriver(), lp.NavigationBack);
+		navigateBack(DeviceSessionManager.getDriver());
 	}
 
 	@Given("the users select Auto&Repair category")
@@ -277,7 +277,7 @@ public class ExploreCategoryStep extends BaseClass {
 			Assert.assertEquals("places Listed " + headerCount, names.size());
 
 		}
-		click(DeviceSessionManager.getDriver(), lp.NavigationBack);
+		navigateBack(DeviceSessionManager.getDriver());
 	}
 
 	@Given("the users select Health&Medical category")
@@ -324,7 +324,7 @@ public class ExploreCategoryStep extends BaseClass {
 			Assert.assertEquals("places Listed " + headerCount, names.size());
 
 		}
-		click(DeviceSessionManager.getDriver(), lp.NavigationBack);
+		navigateBack(DeviceSessionManager.getDriver());
 	}
 
 	@Given("the users select retails&shopping category")
@@ -371,7 +371,7 @@ public class ExploreCategoryStep extends BaseClass {
 			Assert.assertEquals("places Listed " + headerCount, names.size());
 
 		}
-		click(DeviceSessionManager.getDriver(), lp.NavigationBack);
+		navigateBack(DeviceSessionManager.getDriver());
 	}
 
 	@Given("the users select Education category")
@@ -419,6 +419,21 @@ public class ExploreCategoryStep extends BaseClass {
 			Assert.assertEquals("places Listed " + headerCount, names.size());
 
 		}
-		click(DeviceSessionManager.getDriver(), lp.NavigationBack);
+		navigateBack(DeviceSessionManager.getDriver());
+	}
+
+	@Given("the users tap on location field")
+	public void the_users_tap_on_location_field() {
+		click(DeviceSessionManager.getDriver(), lp.locationField);
+	}
+
+	@When("the user tap on city")
+	public void the_user_tap_on_city() {
+		click(DeviceSessionManager.getDriver(), lp.city);
+	}
+
+	@Then("the user should be validate the city")
+	public void the_user_should_be_validate_the_city() {
+		Assert.assertTrue(lp.featured.isDisplayed());
 	}
 }

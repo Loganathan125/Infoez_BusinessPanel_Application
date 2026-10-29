@@ -61,13 +61,26 @@ public class ProfilePage {
 	public WebElement image6;
 	
 	@AndroidFindBy(uiAutomator = "(//*[@resource-id='com.sec.android.gallery3d:id/deco_view_layout'])[position()<=6]")
-	public WebElement restaurant;
+	public List<WebElement> restaurant;
 	
 	@AndroidFindBy(uiAutomator = "new UiSelector().className(\"android.widget.Button\").instance(3)")
 	public WebElement done;
 	
 	@AndroidFindBy(uiAutomator = "new UiSelector().resourceId(\"create-name\")")
 	public WebElement businessName;
+	
+	@AndroidFindBy(uiAutomator = "new UiSelector().text(\"\")")
+	public WebElement notifySymbol;
+	
+	@AndroidFindBy(xpath  = "//*[string-length(@text)>0 and translate(@text,'0123456789','')='' or string-length(@content-desc)>0 and translate(@content-desc,'0123456789','')='']")
+	public WebElement beforeCount;
+	
+
+	@AndroidFindBy(uiAutomator = "new UiSelector().text(\"\").instance(1)")
+	public WebElement firstNotification;
+	
+	@AndroidFindBy(uiAutomator = "new UiSelector().text(\"Open business dashboard\")")
+	public WebElement dashboard;
 	
 	@AndroidFindBy(uiAutomator = "new UiSelector().text(\"Beauty clinic\")")
 	public WebElement category;
@@ -150,6 +163,9 @@ public class ProfilePage {
 	
 	@AndroidFindBy(uiAutomator = "new UiSelector().text(\"Enterprise\").instance(1)")
 	public WebElement entersubs;
+	
+	@AndroidFindBy(uiAutomator = "new UiSelector().text(\"Business dashboard\")")
+	public WebElement businessDashBoard;
 	
 	
 	

@@ -20,8 +20,8 @@ public class ExploreCategoryPage {
 
 	}
 
-	@AndroidFindBy(uiAutomator = "new UiSelector().text(\"\").instance(0)")
-	public WebElement restaurants;
+	@AndroidFindBy(uiAutomator = "new UiSelector().text(\"Beauty clinic\")")
+	public WebElement beautyClinic;
 
 	@AndroidFindBy(xpath = "//android.widget.TextView[@text=\"Explore businesses\"]")
 	public WebElement exploreBusinessPage;
@@ -32,26 +32,26 @@ public class ExploreCategoryPage {
 	@AndroidFindBy(xpath  = "//android.widget.TextView[contains(@text,'reviews')]/preceding-sibling::android.widget.TextView[1]")
 	public List<WebElement> placeCards;
 
-	@AndroidFindBy(uiAutomator = "new UiSelector().text(\"\").instance(1)")
-	public WebElement cafeBackery;
+	@AndroidFindBy(uiAutomator = "new UiSelector().text(\"Pet Care\")")
+	public WebElement petCare;
 
-	@AndroidFindBy(uiAutomator = "new UiSelector().text(\"\").instance(2)")
-	public WebElement BeautySpa;
+	@AndroidFindBy(uiAutomator = "new UiSelector().text(\"Electronics\")")
+	public WebElement electronics;
 
-	@AndroidFindBy(uiAutomator = "new UiSelector().text(\"\").instance(3)")
-	public WebElement Fitness;
+	@AndroidFindBy(uiAutomator = "new UiSelector().text(\"Bakeries\")")
+	public WebElement backeries;
 
-	@AndroidFindBy(uiAutomator = "new UiSelector().text(\"\").instance(0)")
-	public WebElement AutoRepair;
+	@AndroidFindBy(uiAutomator = "new UiSelector().text(\"Robotics\")")
+	public WebElement robotics;
 
-	@AndroidFindBy(uiAutomator = "new UiSelector().text(\"\").instance(1)")
-	public WebElement HealthMedical;
+	@AndroidFindBy(uiAutomator = "new UiSelector().text(\"12345\")")
+	public WebElement numbers;
 
-	@AndroidFindBy(uiAutomator = "new UiSelector().text(\"\").instance(2)")
-	public WebElement Retail;
+	@AndroidFindBy(uiAutomator = "new UiSelector().text(\"Restarunts\")")
+	public WebElement restaurants;
 	
-	@AndroidFindBy(uiAutomator = "new UiSelector().text(\"\").instance(3)")
-	public WebElement Education;
+	@AndroidFindBy(uiAutomator = "new UiSelector().text(\"Yoga\")")
+	public WebElement yoga;
 
 	@AndroidFindBy(uiAutomator = "new UiSelector().text(\"\")")
 	public WebElement NavigationBack;
@@ -76,4 +76,41 @@ public class ExploreCategoryPage {
 	
 	@AndroidFindBy(xpath = "//android.widget.TextView[@text=\"3+\"]")
 	public WebElement Rating3;
+	
+	@AndroidFindBy(xpath = "//android.view.ViewGroup[starts-with(@content-desc,',')]")
+	public WebElement tapRow;
+	
+	@AndroidFindBy(uiAutomator = "new UiSelector().text(\"Automative\")")
+	public WebElement automative;
+	
+	@AndroidFindBy(uiAutomator = "new UiSelector().resourceId(\"home-location\")")
+	public WebElement locationField;
+	
+	@AndroidFindBy(uiAutomator = "new UiSelector().text(\"Chennai\")")
+	public WebElement city;
+	
+	@AndroidFindBy(uiAutomator = "new UiSelector().text(\"Featured in Chennai\")")
+	public WebElement featured;
+	
+
+	@AndroidFindBy(uiAutomator = "new UiSelector().text(\"\").instance(1)")
+	public WebElement cafeBackery;
+	
+	@AndroidFindBy(uiAutomator = "new UiSelector().text(\"\").instance(3)")
+	public WebElement Fitness;
+
+	@AndroidFindBy(uiAutomator = "new UiSelector().text(\"\").instance(0)")
+	public WebElement AutoRepair;
+
+	@AndroidFindBy(uiAutomator = "new UiSelector().text(\"\").instance(1)")
+	public WebElement HealthMedical;
+
+	@AndroidFindBy(uiAutomator = "new UiSelector().text(\"\").instance(2)")
+	public WebElement Retail;
+	
+	@AndroidFindBy(uiAutomator = "new UiSelector().text(\"\").instance(3)")
+	public WebElement Education;
+	@AndroidFindBy(uiAutomator = "new UiSelector().text(\"\").instance(2)")
+	public WebElement BeautySpa;
+
 }
