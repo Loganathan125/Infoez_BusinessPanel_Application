@@ -33,7 +33,7 @@ public class BDSteps {
         wait = new WebDriverWait(
                 driver, Duration.ofSeconds(20));
 
-        Assert.assertTrue("Business owner account is not logged in",
+        Assert.assertTrue( "Business owner account is not logged in",
                 page.profileTab.isDisplayed() &&
                 page.openDashboardButton.isDisplayed() &&
                 page.dashboardTitle.isDisplayed() );
@@ -507,5 +507,6 @@ public class BDSteps {
         Assert.assertTrue(page.newEnquiryStatus.isDisplayed());
     }
 }
+
 
 
