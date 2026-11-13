@@ -1,10 +1,10 @@
 package Com.Stepdefinitions;
 
-import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.concurrent.TimeoutException;
+
 
 import org.junit.Assert;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 
 import Com.BaseClass.BaseClass;
 import Com.Driver.DeviceSessionManager;
@@ -75,7 +75,7 @@ public class ProfilePageStep extends BaseClass {
 
 	@When("the user select the imeage")
 	public void the_user_select_the_imeage() {
-		selectMultiplePhotosByFileName("restaurant_1.jpg","restaurant_2.jpg","restaurant_3.jpg");
+		selectMultiplePhotosByFileName("restaurant_1.jpg", "restaurant_2.jpg", "restaurant_3.jpg");
 //				                       "restaurant_4.jpg","restaurant_5.jpg","restaurant_6.jpg");
 
 	}
@@ -136,71 +136,63 @@ public class ProfilePageStep extends BaseClass {
 		click(DeviceSessionManager.getDriver(), lp.submit);
 	}
 
+	private void verifyError(String expectedMsg) {
+		try {
+			String actual = gettext(DeviceSessionManager.getDriver(), lp.invalid);
+			Assert.assertEquals(expectedMsg, actual);
+		} catch (org.openqa.selenium.TimeoutException | NoSuchElementException e) {
+			Assert.fail("Validation message not show form was submitted.Expected: " + expectedMsg);
+		}
+	}
+
 	@Then("business name required validation  submission should be displayed {string}")
 	public void business_name_required_validation_submission_should_be_displayed(String expected) {
 		switch (expected) {
-		case "Invalid":
-			String actual1 = gettext(DeviceSessionManager.getDriver(), lp.invalid);
-			Assert.assertEquals("Name, category, address, area, and phone are required.", actual1);
-			System.out.println(actual1);
 
-			break;
 		case "Invalid1":
-			String actual2 = gettext(DeviceSessionManager.getDriver(), lp.invalid);
-			Assert.assertEquals("Name, category, address, area, and phone are required.", actual2);
-			System.out.println(actual2);
-
+			verifyError("Name, category, address, area, and phone are required.");
 			break;
 		case "Invalid2":
-			String actual3 = gettext(DeviceSessionManager.getDriver(), lp.invalid);
-			Assert.assertEquals("Name, category, address, area, and phone are required.", actual3);
-			System.out.println(actual3);
-
+			verifyError(expected);
+			click(DeviceSessionManager.getDriver(), lp.submitted);
+			click(DeviceSessionManager.getDriver(), lp.createListing);
 			break;
 		case "Invalid3":
-			String actual4 = gettext(DeviceSessionManager.getDriver(), lp.invalid);
-			Assert.assertEquals("Name, category, address, area, and phone are required.", actual4);
-			System.out.println(actual4);
+			verifyError("Name, category, address, area, and phone are required.");
 
 			break;
 		case "Invalid4":
-			String actual5 = gettext(DeviceSessionManager.getDriver(), lp.invalid);
-			Assert.assertEquals("Name, category, address, area, and phone are required.", actual5);
-			System.out.println(actual5);
 
+			verifyError(expected);
+			click(DeviceSessionManager.getDriver(), lp.submitted);
+			click(DeviceSessionManager.getDriver(), lp.createListing);
 			break;
 		case "Invalid5":
-			String actual6 = gettext(DeviceSessionManager.getDriver(), lp.invalid);
-			Assert.assertEquals("Name, category, address, area, and phone are required.", actual6);
-			System.out.println(actual6);
-
+			verifyError("Name, category, address, area, and phone are required.");
 			break;
 		case "Invalid6":
-			String actual7 = gettext(DeviceSessionManager.getDriver(), lp.invalid);
-			Assert.assertEquals("Name, category, address, area, and phone are required.", actual7);
-			System.out.println(actual7);
+			verifyError(expected);
+			click(DeviceSessionManager.getDriver(), lp.submitted);
+			click(DeviceSessionManager.getDriver(), lp.createListing);
 
 			break;
 		case "Invalid7":
-			String actual8 = gettext(DeviceSessionManager.getDriver(), lp.invalid);
-			Assert.assertEquals("Name, category, address, area, and phone are required.", actual8);
-			System.out.println(actual8);
-
-			break;
-		case "Invalid8":
-			String actual9 = gettext(DeviceSessionManager.getDriver(), lp.invalid);
-			Assert.assertEquals("Name, category, address, area, and phone are required.", actual9);
-			System.out.println(actual9);
+			verifyError("Name, category, address, area, and phone are required.");
 
 			break;
 
 		case "valid":
-			String actual10 = gettext(DeviceSessionManager.getDriver(), lp.invalid);
-			Assert.assertEquals("Name, category, address, area, and phone are required.", actual10);
+//			click(DeviceSessionManager.getDriver(), lp.gallery);
+//			click(DeviceSessionManager.getDriver(), lp.photos);
+//			click(DeviceSessionManager.getDriver(), lp.done);
+			String actual10 = gettext(DeviceSessionManager.getDriver(), lp.submitted);
+			Assert.assertEquals("Listing submitted", actual10);
 			System.out.println(actual10);
-
+            Assert.assertTrue("Listing Is Not submitted", lp.submitted.isDisplayed());
+            System.out.println(lp.submitted);
 			break;
-
+		default:
+			Assert.fail("Unknown expected value: " + expected);
 		}
 	}
 
@@ -268,6 +260,7 @@ public class ProfilePageStep extends BaseClass {
 	public void the_user_validate_claims_submitted() {
 		Assert.assertTrue("Claim is submitted", lp.addVerification.isDisplayed());
 		click(DeviceSessionManager.getDriver(), lp.ok);
+		navigateBack(DeviceSessionManager.getDriver());
 	}
 
 	@Given("the user tap free card subscription")
@@ -319,15 +312,6 @@ public class ProfilePageStep extends BaseClass {
 		click(DeviceSessionManager.getDriver(), lp.freeOk);
 	}
 
-	@Given("the user tap open business dashboard")
-	public void the_user_tap_open_business_dashboard() {
-		click(DeviceSessionManager.getDriver(), lp.dashboard);
-	}
-
-	@Then("the user verify the business dashboard page")
-	public void the_user_verify_the_business_dashboard_page() {
-		Assert.assertTrue("Business Dashboard page not displayed", lp.businessDashBoard.isDisplayed());
-	}
 
 	int beforeNotifications;
 
@@ -364,6 +348,17 @@ public class ProfilePageStep extends BaseClass {
 		int afterNotification = Integer.parseInt(lp.beforeCount.getText().replaceAll("[^0-9]", ""));
 		System.out.println("AfterNotification Count: " + afterNotification);
 		Assert.assertEquals("Notification count did not decreased by one", beforeNotifications - 1, afterNotification);
+	}
+
+	@Given("the user tap open business dashboard")
+	public void the_user_tap_open_business_dashboard() {
+		click(DeviceSessionManager.getDriver(), lp.dashboard);
+	}
+
+	@Then("the user verify the business dashboard page")
+	public void the_user_verify_the_business_dashboard_page() {
+		Assert.assertTrue("Business Dashboard page not displayed", lp.businessDashBoard.isDisplayed());
+		
 	}
 
 }

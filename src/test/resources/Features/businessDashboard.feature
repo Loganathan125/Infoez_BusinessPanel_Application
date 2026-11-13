@@ -1,11 +1,13 @@
 
-@Infoez @BusinessOwner
+@Infoez 
+#@BusinessOwner
 Feature: Infoez Business Owner Mobile Application
 
   Background:
     Given I am logged in as a business owner
 
-  @Positive @BO_Positive
+  #@Positive @BO_Positive 
+  
   Scenario Outline: Verify complete business owner positive flow
 
     When I navigate to the business owner profile
@@ -18,7 +20,9 @@ Feature: Infoez Business Owner Mobile Application
     Then I verify the Business dashboard page is displayed
     And I verify the dashboard tabs are displayed
 
-    When I select the "Overview" tab
+
+
+    When I select the "Overview" tab     
     Then I verify the overview metric "Views" is displayed
     And I verify the overview metric "Calls" is displayed
     And I verify the overview metric "WhatsApp" is displayed
@@ -30,6 +34,7 @@ Feature: Infoez Business Owner Mobile Application
     And I verify the business listing "HomeFix Pro" is displayed
     And I verify the business listing "QuickShift Auto" is displayed
     And I verify the business listing "Aarogya Clinic" is displayed
+
 
     When I select the "Leads" tab
     Then I verify the leads section is displayed
@@ -104,7 +109,7 @@ Feature: Infoez Business Owner Mobile Application
       | Interested | Infoez Test Studio   | Beauty clinic | Test business listing | 10 Main Street | Anna Nagar | Chennai | 600040  | 9000000003 | 9000000003 |
       | Converted  | Infoez Demo Studio   | Beauty clinic | Demo business listing | 15 Main Street | Anna Nagar | Chennai | 600040  | 9000000004 | 9000000004 |
 
-  @Negative @BO_Negative
+  #@Negative @BO_Negative
   Scenario Outline: Verify business listing mandatory field validation
 
     When I navigate to the business owner profile

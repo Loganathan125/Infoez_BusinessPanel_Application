@@ -82,7 +82,7 @@ public class ProfilePage {
 	@AndroidFindBy(uiAutomator = "new UiSelector().text(\"Open business dashboard\")")
 	public WebElement dashboard;
 	
-	@AndroidFindBy(uiAutomator = "new UiSelector().text(\"Beauty clinic\")")
+	@AndroidFindBy(xpath  = "(//android.widget.TextView[@text=\"Category\"]/following-sibling::*[1]//android.widget.TextView)[1]")
 	public WebElement category;
 	
 	@AndroidFindBy(uiAutomator = "new UiSelector().resourceId(\"create-description\")")
@@ -166,6 +166,9 @@ public class ProfilePage {
 	
 	@AndroidFindBy(uiAutomator = "new UiSelector().text(\"Business dashboard\")")
 	public WebElement businessDashBoard;
+	
+	@AndroidFindBy(uiAutomator = "new UiSelector().resourceId(\"com.infoez.app:id/alert_title\")")
+	public WebElement submitted;
 	
 	
 	

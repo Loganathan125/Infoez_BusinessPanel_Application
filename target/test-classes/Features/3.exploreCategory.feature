@@ -16,7 +16,9 @@ Feature: Explore Category Validation
     And the users select FitNess&WellNess category
     And the explore business page should be visiable
     Then placefound count should be validate
-    And the users select Auto&Repair category
+
+  Scenario: to verify the explore category line auto repair and health mediacal
+    When the users select Auto&Repair category
     And the Explore businesses page should be displayed
     Then Auto&Repair place found count should be Validate
     And the users select Health&Medical category
@@ -28,10 +30,9 @@ Feature: Explore Category Validation
     And the users select Education category
     And the Education explore busines Page should be displayed
     Then Education Place found countt should be validate
-    
-    @explore
-    Scenario: to verify the featured in city
-    Given  the users tap on location field
-    When  the user tap on city
+
+  @explore
+  Scenario: to verify the featured in city
+    Given the users tap on location field
+    When the user tap on city
     Then the user should be validate the city
-    

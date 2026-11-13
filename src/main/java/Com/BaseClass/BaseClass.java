@@ -2,13 +2,16 @@ package Com.BaseClass;
 
 import java.time.Duration;
 import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
+import java.util.Set;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.Rectangle;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.PointerInput;
@@ -79,7 +82,7 @@ public class BaseClass {
 		wait.until(ExpectedConditions.visibilityOf(element));
 
 		element.click();
-		element.clear();
+		//element.clear();
 		element.sendKeys(text);
 		driver.hideKeyboard();
 	}
@@ -278,5 +281,63 @@ public class BaseClass {
 
 			waitforPhotoSelect.click();
 		}
+	}
+	public void tapOnActionButton(AndroidDriver androidDriver, String action, WebElement element) {
+		if (element != null) {
+			element.click();
+			return;
+		}
+
+		String actiontext = action.toLowerCase();
+		String upper = "ABCDEFGHIJKLMNOPQRSTVWXYZ";
+		String lower = "abcdefghijklmnopqrstuvwxyz";
+
+//		By btn = By.xpath("//*contains(translate(@text,'"+upper+"','"+lower+"'),'"+actiontext+"')"
+//				+" or contains(translate(@content-desc,'"+upper+"','"+lower+"'),'"+actiontext+"')]");
+
+		By btn = AppiumBy.androidUIAutomator("new UiSelector().textMatches(\"(?i).*" + actiontext + ".*\")");
+		By btnDesc = AppiumBy.androidUIAutomator("new UiSelector().descriptionMatches(\"(?i).*" + actiontext + ".*\")");
+		WebDriverWait wait = new WebDriverWait(androidDriver, Duration.ofSeconds(10));
+
+		WebElement el = wait.until(d -> {
+			java.util.List<WebElement> l = d.findElements(btn);
+			if (l.isEmpty())
+				l = d.findElements(btnDesc);
+			return l.isEmpty() ? null : l.get(0);
+		});
+		el.click();
+
+	}
+public Set<String> getAllTextWithScrollWithOutPrint(java.util.List<WebElement> placeCards) {
+		
+        AndroidDriver d=(AndroidDriver)DeviceSessionManager.getDriver();
+        int noNewCount=0;
+		Set<String> allTexts = new LinkedHashSet<String>();
+		//boolean canScroll = true;
+
+		while (noNewCount<2) {
+			int before = allTexts.size();
+			
+			for (WebElement element : placeCards) {
+				try {
+				
+				String text = element.getAttribute("content-desc");
+				if(text!=null&&!text.trim().isEmpty()) {
+					allTexts.add(text.trim());
+				}
+				}catch(StaleElementReferenceException e) {
+					
+				}
+				
+			
+			}
+			
+			noNewCount =(allTexts.size()==before)?noNewCount+1:0;
+			 d.executeScript("mobile: scrollGesture",
+					Map.of("left", 100, "top", 100, "width", 800, "height", 1600, "direction", "down", "percent", 0.8));
+			
+		}
+
+		return allTexts;
 	}
 }
